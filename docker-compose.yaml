@@ -1,0 +1,70 @@
+version: '3.9'
+services:
+  spark:
+    image: 'docker.io/bitnami/spark:3.5.0'
+    volumes:
+      - type: bind
+        source: ./data
+        target: /opt/data
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    ports:
+      - '7077:7077'
+      - '18080:8080'
+    depends_on:
+      - db
+
+  spark-worker-1:
+    image: docker.io/bitnami/spark:3.5.0
+    volumes:
+      - type: bind
+        source: ./data
+        target: /opt/data
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    depends_on:
+      - db
+
+  etl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: etl:latest
+    volumes:
+      - $PWD/jars:/opt/bitnami/spark/jars
+      - $PWD/data:/opt/data
+      - $PWD/conf:/conf
+    expose:
+      - '5432'
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13.10-alpine
+    # restart: always
+    environment:
+      - POSTGRES_USER=datawow
+      - POSTGRES_PASSWORD=dataengineer
+      - POSTGRES_DB=warehouse
+      - POSTGRES_INITDB_ARGS=--locale=en_US.UTF-8
+      - POSTGRES_DB_ENCRYPTION_ENABLED=no
+    ports:
+      - "5432:5432"
+    volumes:
+      # postgres data store path
+      - ./pg-data:/var/lib/postgresql/data
+      # # SQL script for initializing the database
+      - ./init-script/create_table.sql:/docker-entrypoint-initdb.d/create_table.sql
+    expose:
+      - '5432'

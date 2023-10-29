@@ -1,0 +1,5 @@
+ip: 192.168.1.119 # ip can get of ifconfig command and use the ip value from en0 with command: ifconfig en0 | grep 'inet ' | awk '{print $2}'
+user: sertis
+password: dataengineer
+port: 5432
+driver: org.postgresql.Driver
