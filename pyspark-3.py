@@ -26,14 +26,14 @@ url = "jdbc:postgresql://localhost:5432/warehouse"
 department = data.select("department_name").distinct()
 department = department.withColumn("department_id", F.monotonically_increasing_id()+1).cache()
 department = department.select("department_id", "department_name")
-department.show()
+# department.show()
 department.write.jdbc(url, "department", "append", db_properties)
 
 # Extract and transform Product data
 product = data.select("product_name").distinct()
 product = product.withColumn("product_id", F.monotonically_increasing_id()+1).cache()
 product = product.select("product_id", "product_name")
-product.show()
+# product.show()
 product.write.jdbc(url, "product", "append", db_properties)
 
 # Extract and transform Sensor data
@@ -42,7 +42,7 @@ sensor = data.select("sensor_serial", "department_name").distinct() \
     .select("sensor_serial", "department_id")
 sensor = sensor.withColumn("sensor_id", F.monotonically_increasing_id()+1).cache()
 sensor = sensor.select("sensor_id", "sensor_serial", "department_id")
-sensor.show()
+# sensor.show()
 sensor.write.jdbc(url, "sensor", "append", db_properties)
 
 # Extract and transform DataLog data
@@ -50,7 +50,7 @@ data_log = data.join(sensor, ["sensor_serial"]) \
     .join(product, ["product_name"]) \
     .select((F.monotonically_increasing_id()+1).alias("log_id"), "create_at", "product_id", "sensor_id", "product_expire")
 data_log = data_log.select("log_id", "create_at", "product_id", "sensor_id", "product_expire")
-data_log.show()
+# data_log.show()
 data_log.write.jdbc(url, "dataLog", "append", db_properties)
 
 spark.stop()
