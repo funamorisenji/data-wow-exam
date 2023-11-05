@@ -13,3 +13,12 @@ docker/Volumes/spark/app/main.py
 docker/Volumes/spark/app/test_spark_summit.py
 docker/Volumes/spark/resources/data_sample/
 docker/Volumes/spark/resources/data_sample/*.parquet
+docker/Volumes/spark/resources/data_sample/.DS_Store
+.DS_Store
+.idea/aws.xml
+.idea/data-wow.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
