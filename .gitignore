@@ -1,2 +1,8 @@
 !/data_sample/*.parquet
 !.idea/
+!/archive/
+!/docker/Volumes/pg-data/
+!/docker/Volumes/postgres/
+/docker/Volumes/airflow/logs/
+/docker/Volumes/spark/history/
+/docker/Volumes/spark/logs/
