@@ -168,10 +168,9 @@ If you want to see each task's log, you can click on the task and click on the l
 ## Test the Solution
 A video demonstrating the entire pipeline, from data generation to data ingestion into PostgreSQL, has been provided. The video showcases:
 
-1. [Pipeline initiation and monitoring]()
-2. Data validation in the PostgreSQL database
+1. [Pipeline initiation and monitoring](https://1drv.ms/f/s!ArqUMDU_R-ndg9l0MMeY5aon-heD4w?e=8jmMaM)
+2. [Data validation in the PostgreSQL database](https://1drv.ms/f/s!ArqUMDU_R-ndg9l52GeZCIK3epfkbA?e=Bbocb3)
 
-add link to video 
 
 In case you don't want to see the video you can see the screenshot below.
 
