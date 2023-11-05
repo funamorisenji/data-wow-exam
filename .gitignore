@@ -6,3 +6,5 @@
 /docker/Volumes/airflow/logs/
 /docker/Volumes/spark/history/
 /docker/Volumes/spark/logs/
+!/archive/*
+
