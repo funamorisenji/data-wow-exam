@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "data-wow"
+version = "1.0.1"
+description = "The Python package for run a entrance exam DATA-WOW."
+authors = ["SERPSAIPONG NAVANURAKSA <funamori.senji@gmail.com>"]
+readme = "README.md"
+packages = [{include = "data_wow"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+apache-airflow-providers-apache-spark = "^4.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
